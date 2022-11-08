@@ -1,4 +1,5 @@
 ﻿using ruaplv2.Models;
+using ruaplv2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,23 +9,18 @@ using System.Web.Http;
 
 namespace ruaplv2.Controllers
 {
-    public class contactController : ApiController
+    public class ContactController : ApiController
     {
-        public Contact[] Get()
+        private ContactRepository contactRepository;
+
+        public ContactController()
         {
-            return new Contact[]
-            {
-        new Contact
-        {
-            Id = 1,
-            Name = "Glenn Block"
-        },
-        new Contact
-        {
-            Id = 2,
-            Name = "Dan Roth"
+            this.contactRepository = new ContactRepository();
         }
-            };
+
+       public Contact[] Get()
+        {
+            return contactRepository.GetAllContacts();
         }
     }
 }
